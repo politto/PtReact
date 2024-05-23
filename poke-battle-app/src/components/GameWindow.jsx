@@ -34,31 +34,39 @@ export default function GameWindow() {
 
     return (
         <div id = "gamePanel" className = "flex flex-col items-center align-center">
-            <h1>Welcome to Pokemon battle</h1>
-            <PokemonContext.Provider value = {{pokemons, setPokemons , selectedPokemon, setSelectedPokemon, randPokemon, setRandPokemon}}>
-                <PokemonSelector></PokemonSelector>
-                <div className = "gameWindow m-auto w-[80vw] h-[44vw] min-w-[800px] min-h-[540px] p-[2vw] pb-[0]">
-                    <OpposeInfo></OpposeInfo>
-                    <Info></Info>
-                    <div id="Char" className = "overflow-hidden">
-                        <img 
-                        src=
-                        {pokemons[selectedPokemon].sprites.back_default} 
-                        alt="" srcset="" 
-                        className = "custImg"/>
+            {pokemons.length > 0 ? (
+            <>
+                <h1>Welcome to Pokemon battle</h1>
+                <PokemonContext.Provider value={{ pokemons, setPokemons, selectedPokemon, setSelectedPokemon, randPokemon, setRandPokemon }}>
+                    <PokemonSelector></PokemonSelector>
+                    <div className="gameWindow m-auto w-[80vw] h-[44vw] min-w-[800px] min-h-[540px] p-[2vw] pb-[0]">
+                        <OpposeInfo></OpposeInfo>
+                        <Info></Info>
+                        <div id="Char" className="overflow-hidden">
+                            <img
+                                src={pokemons[selectedPokemon].sprites.back_default}
+                                alt=""
+                                srcset=""
+                                className="custImg"
+                            />
+                        </div>
+                        <div id="opposeChar">
+                            <img
+                                src={pokemons[randPokemon].sprites.front_default}
+                                alt=""
+                                srcset=""
+                                className="custImg2"
+                            />
+                        </div>
                     </div>
-                    <div id="opposeChar">
-                    <img 
-                        src=
-                        {pokemons[randPokemon].sprites.front_default} 
-                        alt="" srcset="" 
-                        className = "custImg2"/>
+                    <div className="">
+                        <GameText></GameText>
                     </div>
-                </div>
-                <div className="">
-                    <GameText></GameText>
-                </div>
-            </PokemonContext.Provider>
+                </PokemonContext.Provider>
+            </>
+        ) : (
+            <p>loading...</p>
+        )}
             
         </div>
     )
